@@ -25,7 +25,7 @@ repo-info: ## Commits the HEAD of remote git repository branch.
 # Check git configurations before use this script, like: $ git remote -v
 branch ?= master
 comment ?= main/$(shell date +"%Y%m%d%H%M%S")
-repo-commit: ## Commits the HEAD of remote git repository branch.
+repo-update: ## Commits the HEAD of remote git repository branch.
 	@echo ${C_YEL}"ATTENTION:"${C_END}
 	@echo "All local changes from branch:"
 	git branch;
