@@ -1,10 +1,11 @@
 # Local Net Admin
 This service runs on **systemctl** Debian 8+ / Ubuntu 16.04+ **(still in development)**
 
-This bash script service is for helping on local machine or VPS server *(with LINUX OS)* to speed up common actions to deploy, list or remove testing domains with much frequency.
-In my case, accomplishing all the steps turned into an anoyed job and waiste of time and focus. So, that's why I took the time to implement something like this local support service.
+This script service is a batch of shortcuts to help on **LINUX OS** local machine or VPS server to speed up common actions to deploy, list or remove testing domains with much frequency.
+In my case, accomplishing all the steps turned into an anoyed job thus a waiste of time and focus. So, that's why I took the time to implement something like this shortcuts support service.
 
-My stack sorrounds a variaty of webapps projects with PHP, .NET, Java, NodeJS. So, this support service is developed for machines with serves port 80 with NGINX, proxing Apache2, NodeJS *(w/PM2)*.
+My stack sorrounds a variaty of webapps projects with PHP, .NET, Java, NodeJS. So, this support service is developed for servers that primarly use NGINX listening on port 80 and reversed proxy for Apache2 on some PHP apps. \
+In case of Dockerized projects, NodeJS *(w/PM2)*, .NET or JAVA...(in development)
 
 ## Installation
 Create directory to place this bash as follows with path example:
@@ -40,13 +41,22 @@ $ localnet domains:index apache
 **Listing active domains:** \
 List all domains registered and active running on localhost by server platform
 ```bash
-$ localnet domains:active apache
+$ localnet domains:active nginx
 ```
 
 **Update server domains:** \
 Once a domain is created or updated, run:
 ```bash
-$ localnet domains:update apache
+$ localnet domains:update nginx
+```
+
+**Check domain info:** \
+Check domain status and configuration by server platform
+```bash
+$ localnet domain:create nginx example
+```
+Output domain example:
+```bash
 ```
 
 **Check domain info:** \
