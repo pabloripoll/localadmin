@@ -5,6 +5,10 @@ C_RED='\033[0;31m'
 C_YEL='\033[0;33m'
 C_END='\033[0m'
 
+REPO_URL=https://github.com/(your-github-user)/(your-repository-name).git
+REPO_SSH=git@github.com:(your-github-user)/(your-repository-name).git
+REPO_MAIN=master
+
 help: ## Show this help message
 	echo 'usage: make [target]'
 	echo
@@ -13,13 +17,8 @@ help: ## Show this help message
 
 # Common git process
 
-repo-install: ## Commits the HEAD of remote git repository branch.
-	git init;
-	git remote add origin git@github.com:pabloripoll/localadmin.git;
-	git branch -M master;
-
 repo-info: ## Commits the HEAD of remote git repository branch.
-	@echo "Remote:" ${C_YEL}$(shell git config --get remote.origin.url)${C_END}
+	@echo "Repository URL:" ${C_YEL}$(shell git config --get remote.origin.url)${C_END}
 
 # Specific branch $ make repo-update branch=??? comment="???"
 # Or by default master branch $ make repo-update
@@ -45,3 +44,17 @@ repo-update: ## Commits the HEAD of remote git repository branch.
 		git push origin -u master; \
         echo ${C_GRN}"O.K.! process has been finished."${C_END}; \
     fi
+
+repo-install: ## Install git repository when remote is empty.
+	git init;
+	git remote add origin ${REPO_SSH};
+	git branch -M ${REPO_MAIN};
+
+repo-create: ## Creates git repository on local and remote.
+	echo "# localadmin" >> README.md;
+	git init;
+	git add README.md;
+	git commit -m "first commit";
+	git branch -M ${REPO_MAIN};
+	git remote add origin ${REPO_SSH};
+	git push -u origin ${REPO_MAIN};
