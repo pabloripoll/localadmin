@@ -2,14 +2,9 @@
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/config.sh"
 . "$DIR/support/styles.sh"
 . "$DIR/support/dialogues.sh"
-
-script="";
-param_1="";
-param_2="";
-param_3="";
-param_4="";
 
 for param in "$@" 
 do
@@ -40,4 +35,6 @@ run()
 }
 
 run
+
+# Terminal output last line break
 echo

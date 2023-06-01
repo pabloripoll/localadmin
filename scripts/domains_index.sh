@@ -14,6 +14,6 @@ fi
 
 printf "$(green "Domains registered locally on") $(yellow ${platform^^}) $(green "server platform:")"; echo;
 
-if [[ "$platform" =~ ^(apache)$ ]]; then platform="apache2"; fi
+if [[ "$platform" =~ ^(apache)$ ]]; then platform=$ETC_APACHE; fi
 
 ls -l /etc/$platform/sites-available/;
