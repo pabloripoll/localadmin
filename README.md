@@ -1,4 +1,4 @@
-# Local Net Admin
+# Domains Admin
 This service runs on **systemctl** Debian 8+ / Ubuntu 16.04+ **(still in development)**
 
 This script service is a batch of shortcuts to help on **LINUX OS** local machine or VPS server to speed up common actions to deploy, list or remove testing domains with much frequency.
