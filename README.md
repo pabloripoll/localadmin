@@ -1,5 +1,5 @@
 # Local Net Admin
-This service runs on Debian 8+ / Ubuntu 16.04+ **(still in development)**
+This service runs on **systemctl** Debian 8+ / Ubuntu 16.04+ **(still in development)**
 
 This bash script service is for helping on local machine or VPS server *(with LINUX OS)* to speed up common actions to deploy, list or remove testing domains with much frequency.
 In my case, accomplishing all the steps turned into an anoyed job and waiste of time and focus. So, that's why I took the time to implement something like this local support service.
@@ -25,9 +25,10 @@ $ localnet domains nginx
 But before start, ** * read `config/settings.sh` to know if any variable or constant must be updated * **
 
 # Commands
+All examples use **localnet** as alias
 
 **Listing registered domains:** \
-List all domains registered on server plaform like **Nginx** or **Apache** *(shortcut for: apache2)*
+List all domains registered by server plaform as **Nginx** or **Apache** *(shortcut for: apache2)*
 ```bash
 $ localnet domains apache
 ```
@@ -37,19 +38,19 @@ $ localnet domains:index apache
 ```
 
 **Listing active domains:** \
-List all domains registered and active to visit on localhost by server
+List all domains registered and active running on localhost by server platform
 ```bash
 $ localnet domains:active apache
 ```
 
 **Update server domains:** \
-List all domains registered and active to visit on localhost by server
+Once a domain is created or updated, run:
 ```bash
 $ localnet domains:update apache
 ```
 
 **Check domain info:** \
-List all domains registered and active to visit on localhost by server
+Check domain status and configuration by server platform
 ```bash
 $ localnet domain apache example
 ```
@@ -78,7 +79,7 @@ Domain configuration:
         # SetHandler "proxy:fcgi://127.0.0.1:9000"
     </FilesMatch> 
 
-    #ErrorLog ${APACHE_LOG_DIR}/error.log
-    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
