@@ -12,21 +12,28 @@ if [[ ! "$platform" =~ ^(nginx|apache)$ ]]; then
     exit 1;
 fi
 
-echo $(blue "checking") $(yellow ${platform^^}) $(blue "for syntax errors:");
+echo checking $(yellow ${platform^^}) for syntax errors:
 
 if [[ "$platform" =~ ^(nginx)$ ]]; then
-    sudo $platform -t;
-    echo $(blue "updating...");
-    sudo systemctl restart $platform;    
-
-elif [[ "$platform" =~ ^(apache)$ ]]; then 
-    platform2="apache2";
-    echo $(blue "updating...");
-    sudo systemctl reload $platform2;
-
-else
-    sudo systemctl restart $platform;
-
+    check=$(sudo ${platform} -t 2>&1)
+    if [[ ${check##* } =~ ^(failed)$ ]]; then
+        echo $(red "Some errors must be fixed first!");
+        sudo ${platform} -t
+    else
+        echo $(blue "updating...");
+        sudo systemctl restart ${platform};
+        echo $(yellow ${platform^^}) $(green "sites has been updated!");
+    fi
 fi
 
-echo $(yellow ${platform^^}) $(green "sites has been updated!");
+if [[ "$platform" =~ ^(apache)$ ]]; then
+    check=$(sudo ${platform}ctl -t 2>&1)
+    if ! echo $check | grep -q "Syntax OK"; then        
+        echo $(yellow "Some errors must be fixed first!");
+        sudo ${platform}ctl -t
+    else
+        echo $(blue "updating...");
+        sudo systemctl reload ${platform}2;
+        echo $(yellow ${platform^^}) $(green "sites has been updated!");
+    fi
+fi

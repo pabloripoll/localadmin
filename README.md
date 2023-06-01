@@ -45,20 +45,40 @@ $ localnet domains:active apache
 **Update server domains:** \
 List all domains registered and active to visit on localhost by server
 ```bash
-$ localnet domains:active apache
+$ localnet domains:update apache
 ```
 
 **Check domain info:** \
 List all domains registered and active to visit on localhost by server
 ```bash
-$ localnet domain example
+$ localnet domain apache example
 ```
-Output on registered domain:
+Output domain example:
 ```bash
-Domain: example.localhost is running on APACHE reversed proxy by NGINX
-```
-Output if domain is not registered in any server platform
-```bash
-Domain: .localhost has not been activated.
-To activate this domain run: $ localnet domain:create
+Domain: example.localhost has been created.
+Domain: example.localhost is running!
+Domain configuration:
+<VirtualHost *:8080>
+    ServerName example.localhost
+    ServerAlias www.example.localhost
+    
+    DocumentRoot /var/www/apache/example/
+
+    <Directory /var/www/apache/example/>
+        Options -Indexes +FollowSymLinks -MultiViews
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Enable PHP-FPM adding the following block
+    <FilesMatch \.php$>
+        # 2.4.10+ can proxy to unix socket
+        SetHandler "proxy:unix:/var/run/php/php8.1-fpm.sock|fcgi://localhost"
+	# Else we can just use a tcp socket:
+        # SetHandler "proxy:fcgi://127.0.0.1:9000"
+    </FilesMatch> 
+
+    #ErrorLog ${APACHE_LOG_DIR}/error.log
+    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 ```
