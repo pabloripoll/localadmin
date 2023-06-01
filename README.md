@@ -50,8 +50,8 @@ Once a domain is created or updated, run:
 $ localnet domains:update nginx
 ```
 
-**· Check domain info:** \
-Check domain status and configuration by server platform
+**· Create domain:** \
+Create domain by server platform
 ```bash
 $ localnet domain:create nginx example
 ```
