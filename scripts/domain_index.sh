@@ -26,7 +26,7 @@ else
     if [[ "$action" =~ ^(edit)$ ]]; then
         sudo nano $FILE;
         echo To perform changes run: $ $(green "localnet domains:update") $(yellow "${platform::-1}")
-        return 1;
+        exit 1
     else
         echo Domain: $(yellow "$domain.localhost") $(green "was created.")
     fi

@@ -37,7 +37,7 @@ fi
 
 # Security
 echo Activating $(yellow "$domain.localhost") on $(yellow "${platform^^}") server.
-prompt_confirm "Are you sure to continue?" || exit 0
+prompt_confirm_proceed "Are you sure to continue?" || exit 0
 
 if [[ $proxy===false ]]; then
     echo Activating $(yellow "$domain.localhost") on $(yellow "${platform^^}") server...

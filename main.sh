@@ -2,7 +2,7 @@
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/config/settings.sh"
+. "$DIR/config/setting.sh"
 . "$DIR/support/styles.sh"
 . "$DIR/support/dialogues.sh"
 
@@ -28,7 +28,7 @@ run()
     if [ ! -f "$FILE" ]; then
         echo Localnet script: $(yellow "'$script:$method'") $(red "cannot be found!")
         echo For localnet $(yellow "'scripts'") information run: $ $(green "localnet help")
-        return 1
+        exit 1
     else
         . $FILE
     fi

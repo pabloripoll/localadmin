@@ -9,7 +9,7 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 ALIAS="localnet"
 
 echo Activating $(yellow "LocalNetAdmin") with $(yellow "${ALIAS}") as alias name:
-prompt_confirm "Are you sure to continue?" || return 1
+prompt_confirm_proceed "Are you sure to continue?" || return 1
 
 echo "" >> ~/.bashrc
 echo "## --- LOCALNETADMIN --- ###" >> ~/.bashrc

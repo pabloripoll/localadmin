@@ -8,17 +8,19 @@ My stack sorrounds a variaty of webapps projects with PHP, .NET, Java, NodeJS. S
 In case of Dockerized projects, NodeJS *(w/PM2)*, .NET or JAVA...(in development)
 
 ## Installation
-Create directory to place this bash as follows with path example:
+By default the alias is the mnemotechnic `localnet` name. So, all following examples will use **localnet** as alias. If you want to use another alias, open `install.sh` file in main directory and change `ALIAS="localnet"` constant.
+
+Create directory where this script service is going to be placed. The following example will use:
 ```bash
 $ mkdir /var/www/admin; sudo chown $USER:root /var/www/admin; cd /var/www/admin; 
 ```
 
-Open the `install.sh` file to update settings if needed. By default the alias is `localnet`. Then, run the installation script
+Open the `install.sh` file to update settings if needed. Then, run the installation script
 ```bash
 $ . install.sh
 ```
 
-Now you can run the script commands inside.
+Now you can run the script commands inside. For e.g.:
 ```bash
 $ localnet domains nginx
 ```
@@ -26,7 +28,6 @@ $ localnet domains nginx
 But before start, ** * read `config/settings.sh` to know if any variable or constant must be updated * **
 
 # Commands
-All examples use **localnet** as alias
 
 **· Listing registered domains:** \
 List all domains registered by server plaform as **Nginx** or **Apache** *(shortcut for: apache2)*
