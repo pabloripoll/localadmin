@@ -28,7 +28,7 @@ But before start, ** * read `config/settings.sh` to know if any variable or cons
 # Commands
 All examples use **localnet** as alias
 
-** # Listing registered domains:** \
+**# Listing registered domains:** \
 List all domains registered by server plaform as **Nginx** or **Apache** *(shortcut for: apache2)*
 ```bash
 $ localnet domains apache
@@ -38,7 +38,7 @@ Or is the sames as:
 $ localnet domains:index apache
 ```
 
-** # Listing active domains:** \
+**# Listing active domains:** \
 List all domains registered and active running on localhost by server platform
 ```bash
 $ localnet domains:active nginx
