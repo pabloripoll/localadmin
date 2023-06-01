@@ -1,22 +1,64 @@
 # Local Net Admin
 This service runs on Debian 8+ / Ubuntu 16.04+ **(still in development)**
 
-The intention of this script service is for helping on local machine or VPS server *(with LINUX OS)* to speed up common actions to deploy, list or remove testing domains with much frequency.
-In my case, accomplished all the steps turned into an anoyed job and waiste of time and focus. And that's why I took the time to implement something like this script service.
+This bash script service is for helping on local machine or VPS server *(with LINUX OS)* to speed up common actions to deploy, list or remove testing domains with much frequency.
+In my case, accomplishing all the steps turned into an anoyed job and waiste of time and focus. So, that's why I took the time to implement something like this local support service.
 
-My stack sorrounds webapps woth PHP or NodeJS, so this script service is developed for machines with servers platforms installed like Nginx, Apache2 and NodeJS *(w/PM2)*.
+My stack sorrounds a variaty of webapps projects with PHP, .NET, Java, NodeJS. So, this support service is developed for machines with serves port 80 with NGINX, proxing Apache2, NodeJS *(w/PM2)*.
 
-## Configuration
-Open user bashrc
+## Installation
+Create directory to place this bash as follows with path example:
 ```bash
-$ nano ~/.bashrc
+$ mkdir /var/www/admin; sudo chown $USER:root /var/www/admin; cd /var/www/admin; 
 ```
-At the end of the file add these following lines with the path where this service script was located
+
+Open the `install.sh` file to update settings if needed. By default the alias is `localnet`. Then, run the installation script
 ```bash
-## --- CUSTOM --- ###
-alias localnet='/var/www/admin/main.sh'
+$ . install.sh
 ```
-Then update bashrc
+
+Now you can run the script commands inside.
 ```bash
-$ source ~/.bashrc
+$ localnet domains nginx
+```
+
+But before start, ** * read `config/settings.sh` to know if any variable or constant must be updated * **
+
+# Commands
+
+**Listing registered domains:** \
+List all domains registered on server plaform like **Nginx** or **Apache** *(shortcut for: apache2)*
+```bash
+$ localnet domains apache
+```
+Or is the sames as:
+```bash
+$ localnet domains:index apache
+```
+
+**Listing active domains:** \
+List all domains registered and active to visit on localhost by server
+```bash
+$ localnet domains:active apache
+```
+
+**Update server domains:** \
+List all domains registered and active to visit on localhost by server
+```bash
+$ localnet domains:active apache
+```
+
+**Check domain info:** \
+List all domains registered and active to visit on localhost by server
+```bash
+$ localnet domain example
+```
+Output on registered domain:
+```bash
+Domain: example.localhost is running on APACHE reversed proxy by NGINX
+```
+Output if domain is not registered in any server platform
+```bash
+Domain: .localhost has not been activated.
+To activate this domain run: $ localnet domain:create
 ```

@@ -2,7 +2,7 @@
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/config.sh"
+. "$DIR/config/settings.sh"
 . "$DIR/support/styles.sh"
 . "$DIR/support/dialogues.sh"
 
