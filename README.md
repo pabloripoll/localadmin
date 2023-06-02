@@ -9,6 +9,7 @@ For PHP projects, will get PHP versions installed locally and depending on wich 
 In the other hand, for Dockerized projects or directly served in other ports, like: NodeJS *(w/PM2)*, .NET or JAVA, it will create an server block for NGINX with reversed proxy to the desired port.
 
 ## Minimum requirements
+Linux OS with Debian 8+ or Ubuntu 16+
 NGINX on port:80 \
 Apache2 \
 PHP FPM
@@ -31,7 +32,7 @@ Now you can run the script commands inside. For e.g.:
 $ localnet domains nginx
 ```
 
-But before start, ** * read `config/settings.sh` to know if any variable or constant must be updated * **
+But before start, **read `config/settings.sh` to know if any variable or constant must be updated**
 
 # Commands
 
@@ -92,7 +93,7 @@ Domain configuration:
     <FilesMatch \.php$>
         # 2.4.10+ can proxy to unix socket
         SetHandler "proxy:unix:/var/run/php/php8.1-fpm.sock|fcgi://localhost"
-	# Else we can just use a tcp socket:
+	    # Else we can just use a tcp socket:
         # SetHandler "proxy:fcgi://127.0.0.1:9000"
     </FilesMatch> 
 

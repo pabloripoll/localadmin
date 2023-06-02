@@ -32,14 +32,14 @@ if [[ "$platform" =~ ^(nginx)$ ]]; then
         ssl=false
     fi
 
-    read -p "Enter the directory in which the domain will match: ${PRO_NGINX}/" path
+    read -p "Enter the directory in which the domain will match: ${PROJ_NGINX}/" path
     if [[ "$path" =~ ^()$ ]]; then
-        echo $(red "domain directory path cannot be ${PRO_NGINX}/")
+        echo $(red "domain directory path cannot be ${PROJ_NGINX}/")
         exit 1
     fi
 
-    read -p "Enter the language will be applied from between options [php, node, net, java, pyton]: " code
-    if [[ "$code" =~ ^()$ || ! "$code" =~ ^(php|node|net|java|pyton)$ ]]; then
+    read -p "Enter the language will be applied from between options [${LANGS}]: " code
+    if [[ "$code" =~ ^()$ || ! "$code" =~ ^(${LANGS})$ ]]; then
         echo $(red "Entered language does not match any options!")
         exit 1
     fi
@@ -72,9 +72,9 @@ if [[ "$platform" =~ ^(apache)$ ]]; then
         ssl=false
     fi
 
-    read -p "Enter the directory in which the domain will match: ${PRO_APACHE}/" path
+    read -p "Enter the directory in which the domain will match: ${PROJ_APACHE}/" path
     if [[ "$path" =~ ^()$ ]]; then
-        echo $(red "domain directory path cannot be ${PRO_APACHE}/")
+        echo $(red "domain directory path cannot be ${PROJ_APACHE}/")
         exit 1
     fi
 

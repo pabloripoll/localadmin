@@ -7,13 +7,20 @@ param_2="";
 param_3="";
 param_4="";
 
-## Constants
+## Servers
 ETC_NGINX="nginx";
 ETC_APACHE="apache2";
 
-## Domains projects
-PRO_NGINX="/var/www/nginx"
-PRO_APACHE="/var/www/apache"
+## Languages
+LANGS="php|node|net|java|pyton"
+## Domain projects
+PROJ_FLD="/var/www"
+PROJ_JAVA="/var/www/java"
+PROJ_NGINX="/var/www/nginx"
+PROJ_APACHE="/var/www/apache"
+PROJ_NODEJS="/var/www/nodejs"
+PROJ_DOTNET="/var/www/dotnet"
+PROJ_PYTHON="/var/www/python"
 
 ## Language versions
 php_versions()
