@@ -2,10 +2,16 @@
 This service runs on **systemctl** Debian 8+ / Ubuntu 16.04+ **(still in development)**
 
 This script service is a batch of shortcuts to help on **LINUX OS** local machine or VPS server to speed up common actions to deploy, list or remove testing domains with much frequency.
-In my case, accomplishing all the steps turned into an anoyed job thus a waiste of time and focus. So, that's why I took the time to implement something like this shortcuts support service.
+In my case, accomplishing all the steps turned into an anoyed job thus a waiste of time and focus. So, that's why I took the time to implement something like this shortcuts support.
 
-My stack sorrounds a variaty of webapps projects with PHP, .NET, Java, NodeJS. So, this support service is developed for servers that primarly use NGINX listening on port 80 and reversed proxy for Apache2 on some PHP apps. \
-In case of Dockerized projects, NodeJS *(w/PM2)*, .NET or JAVA...(in development)
+This support is developed for servers that primarly use NGINX listening on port 80. The **domain:create** wizard will ask for the basic configuration parameters to create a new server block but for practical usage, the edit will be manual. \
+For PHP projects, will get PHP versions installed locally and depending on wich serve is choosed, will automatically reversed proxy. \
+In the other hand, for Dockerized projects or directly served in other ports, like: NodeJS *(w/PM2)*, .NET or JAVA, it will create an server block for NGINX with reversed proxy to the desired port.
+
+## Minimum requirements
+NGINX on port:80 \
+Apache2 \
+PHP FPM
 
 ## Installation
 By default the alias is the mnemotechnic `localnet` name. So, all following examples will use **localnet** as alias. If you want to use another alias, open `install.sh` file in main directory and change `ALIAS="localnet"` constant.
