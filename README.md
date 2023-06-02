@@ -9,7 +9,7 @@ For PHP projects, will get PHP versions installed locally and depending on wich 
 In the other hand, for Dockerized projects or directly served in other ports, like: NodeJS *(w/PM2)*, .NET or JAVA, it will create an server block for NGINX with reversed proxy to the desired port.
 
 ## Minimum requirements
-Linux OS with Debian 8+ or Ubuntu 16+
+Linux OS with Debian 8+ or Ubuntu 16+ \
 NGINX on port:80 \
 Apache2 \
 PHP FPM
@@ -39,11 +39,11 @@ But before start, **read `config/settings.sh` to know if any variable or constan
 **· Listing registered domains:** \
 List all domains registered by server plaform as **Nginx** or **Apache** *(shortcut for: apache2)*
 ```bash
-$ localnet domains apache
+$ localnet domains nginx
 ```
 Or is the sames as:
 ```bash
-$ localnet domains:index apache
+$ localnet domains:index nginx
 ```
 
 **· Listing active domains:** \
@@ -58,21 +58,63 @@ Once a domain is created or updated, run:
 $ localnet domains:update nginx
 ```
 
-**· Create domain:** \
-Create domain by server platform
+All `$ localnet domains:` scripts can be requested for Apache server as well.
+
+**· Single domain action:** \
+Default top level domain is *.localhost* for is not necessary to add it when is used on local machine
 ```bash
-$ localnet domain:create nginx example
+$ localnet domain nginx example
 ```
-Output domain example:
+But if this program has been installed on a remote server, constant `TLD=""` on `config/settings.sh` must be empty to manage others top level domain
 ```bash
+$ localnet domain nginx example.com
 ```
 
 **· Check domain info:** \
-Check domain status and configuration by server platform
+To check out a domain existance and configuration
+```bash
+$ localnet domain nginx example
+```
+Output will prompt as follow example
+```bash
+server {
+        listen 80;
+        listen [::]:80;
+        root /var/www/nginx/example;
+        index index.php index.html;
+        server_name example.localhost www.example.localhost;
+        location / {
+                try_files $uri $uri/ =404;
+        }
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        }
+}
+```
+Or if domain is reversed proxy to another port as following example to Apache.
+```bash
+server {
+        listen 80;
+        listen [::]:80;
+        server_name codesignart.localhost www.codesignart.localhost;
+        location / {
+                proxy_pass http://127.0.0.1:8080;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+        location ~ /\.ht {
+                deny all;
+        }
+}
+```
+So just on Apache reversed proxy domain existance and configuration look up can be requested changing server platform
 ```bash
 $ localnet domain apache example
 ```
-Output domain example:
+Output will prompt as follow example
 ```bash
 Domain: example.localhost has been created.
 Domain: example.localhost is running!
@@ -89,15 +131,20 @@ Domain configuration:
         Require all granted
     </Directory>
 
-    # Enable PHP-FPM adding the following block
     <FilesMatch \.php$>
-        # 2.4.10+ can proxy to unix socket
         SetHandler "proxy:unix:/var/run/php/php8.1-fpm.sock|fcgi://localhost"
-	    # Else we can just use a tcp socket:
-        # SetHandler "proxy:fcgi://127.0.0.1:9000"
     </FilesMatch> 
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
+
+**· Create domain:** \
+Create domain by server platform
+```bash
+$ localnet domain:create nginx example
+```
+Output domain example:
+```bash
 ```

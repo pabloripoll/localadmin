@@ -7,12 +7,20 @@ param_2="";
 param_3="";
 param_4="";
 
+## Top level domain by default or leave it empty when others are used
+TLD=".localhost" #
+
 ## Servers
 ETC_NGINX="nginx";
 ETC_APACHE="apache2";
 
+## Ports
+PORT_NGINX=80
+PORT_APACHE=8080
+
 ## Languages
-LANGS="php|node|net|java|pyton"
+LANGS="php|nodejs|dotnet|java|pyton|c++|go"
+
 ## Domain projects
 PROJ_FLD="/var/www"
 PROJ_JAVA="/var/www/java"
