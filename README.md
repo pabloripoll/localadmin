@@ -60,15 +60,16 @@ $ localnet domains:update nginx
 
 All `$ localnet domains:` scripts can be requested for Apache server as well.
 
-**· Single domain action:** \
+**· Single root domain actions:** \
 Default top level domain is *.localhost* for is not necessary to add it when is used on local machine
 ```bash
 $ localnet domain nginx example
 ```
-But if this program has been installed on a remote server, constant `TLD=""` on `config/settings.sh` must be empty to manage others top level domain
+But if this program has been installed on a remote server, constant `TLD=""` on `config/settings.sh` must be set empty to manage full root domain
 ```bash
 $ localnet domain nginx example.com
 ```
+**IMPORTANT!** **** Shouldn't be applied protocols **http:// https://**, neither subdomain **www.** ****
 
 **· Check domain info:** \
 To check out a domain existance and configuration
@@ -97,7 +98,7 @@ Or if domain is reversed proxy to another port as following example to Apache.
 server {
         listen 80;
         listen [::]:80;
-        server_name codesignart.localhost www.codesignart.localhost;
+        server_name example.localhost www.example.localhost;
         location / {
                 proxy_pass http://127.0.0.1:8080;
                 proxy_set_header Host $host;

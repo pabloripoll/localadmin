@@ -118,12 +118,47 @@ prompt_confirm_proceed "Are all the parameters correct?" || exit 1
 
 echo Creating $(green "$domain$LTD") on $(yellow "${platform^^}") server.
 
-# Create file
-_file="$domain$LTD.conf"
-if [ -f "$_file" ]; then
-  echo "# server block" > $_file
+# Create server block
+_block_nginx="$domain$LTD.conf"
+if [ -f "$_block_nginx" ]; then
+  echo "# server block" > $_block_nginx
 fi
-echo "server {" >> $_file
-echo "$(printf "%-8s")listen 80;" >> $_file
-echo "$(printf "%-8s")listen [::]:80;" >> $_file
-echo "}" >> $_file
+
+if [[ "$code" =~ ^(php)$ && "$platform" =~ ^(nginx)$ ]]; then 
+    echo "server {" >> $_block_nginx
+    echo "$(printf "%-8s")listen 80;" >> $_block_nginx
+    echo "$(printf "%-8s")listen [::]:80;" >> $_block_nginx
+    echo "" >> $_block_nginx
+        # SSL configuration
+        # listen 443 ssl default_server;
+        # listen [::]:443 ssl default_server;
+    echo "" >> $_block_nginx
+        # Site path
+        root /var/www/nginx/db-mariadb;
+    echo "" >> $_block_nginx
+        # Add index.php to the list if you are using PHP
+        index index.php index.html;
+    echo "" >> $_block_nginx
+        # Domain or subdomain with its top level domain
+        server_name mariadb.localhost www.mariadb.localhost;
+    echo "" >> $_block_nginx
+        location / {
+                # First attempt to serve request as file, then as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+        }
+    echo "" >> $_block_nginx
+        # Pass PHP scripts to FastCGI server
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                # With php-fpm (or other unix sockets):
+                fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+                # With php-cgi (or other tcp sockets):
+                #fastcgi_pass 127.0.0.1:9000;
+        }
+    echo "" >> $_block_nginx
+    echo "}" >> $_block_nginx
+fi
+
+if [[ "$code" =~ ^(php)$ && "$platform" =~ ^(apache)$ ]]; then 
+    echo creating just for apache
+fi
