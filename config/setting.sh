@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## Alias
+ALIAS="localnet"
+
 ## Variables
 script="";
 param_1="";
@@ -7,28 +10,32 @@ param_2="";
 param_3="";
 param_4="";
 
-## Top level domain by default or leave it empty when others are used
-TLD=".localhost" #
+## Top level domain by default for local machine or leave it empty for remote
+TLD=".localhost"
 
 ## Servers
-ETC_NGINX="nginx";
-ETC_APACHE="apache2";
+SERVERS="nginx|apache"
 
-## Ports
+## Server directory
+ETC_NGINX="/etc/nginx";
+ETC_APACHE="/etc/apache2";
+
+## Server port
 PORT_NGINX=80
 PORT_APACHE=8080
 
-## Languages
-LANGS="php|nodejs|dotnet|java|pyton|c++|go"
-
-## Domain projects
+## Custom project's directories
 PROJ_FLD="/var/www"
-PROJ_JAVA="/var/www/java"
-PROJ_NGINX="/var/www/nginx"
+PROJ_PHP="/var/www/nginx"
 PROJ_APACHE="/var/www/apache"
+PROJ_JAVA="/var/www/java"
 PROJ_NODEJS="/var/www/nodejs"
 PROJ_DOTNET="/var/www/dotnet"
 PROJ_PYTHON="/var/www/python"
+PROJ_GO="/var/www/golang"
+
+## Languages
+LANGS="php|nodejs|dotnet|java|pyton|c++|go"
 
 ## Language versions
 php_versions()
@@ -44,3 +51,6 @@ php_versions()
     echo $output
 }
 PHP_VERSIONS=$(php_versions)
+
+## Special
+NOTDOMAIN="default|default.dpkg|default.dpkg-old|000-default.conf|000-default.conf.save|default-ssl.conf"

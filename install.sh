@@ -2,17 +2,16 @@
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/config/setting.sh"
 . "$DIR/support/styles.sh"
 . "$DIR/support/dialogues.sh"
 
-# SETTINGS
-ALIAS="localnet"
-
-echo Activating $(yellow "LocalNetAdmin") with $(yellow "${ALIAS}") as alias name:
-prompt_confirm_proceed "Are you sure to continue?" || return 1
+echo "Bash --version ${BASH_VERSION}"
+echo Activating $(yellow "Domains Admin") with $(yellow "${ALIAS}") as alias name:
+prompt_confirm_proceed "Are you sure to continue?" || exit 1
 
 echo "" >> ~/.bashrc
-echo "## --- LOCALNETADMIN --- ###" >> ~/.bashrc
+echo "## --- DOMAINS ADMIN --- ###" >> ~/.bashrc
 echo "alias $ALIAS='$DIR/main.sh'" >> ~/.bashrc
 source ~/.bashrc
 

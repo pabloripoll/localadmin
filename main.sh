@@ -6,14 +6,16 @@ if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/support/styles.sh"
 . "$DIR/support/dialogues.sh"
 
-for param in "$@" 
+iparams=0
+for param in "$@"
 do
     if [[ "$i" =~ ^()$ ]]; then script=$param; fi
     if [[ "$i" =~ ^(1)$ ]]; then param_1=$param; fi
     if [[ "$i" =~ ^(2)$ ]]; then param_2=$param; fi
     if [[ "$i" =~ ^(3)$ ]]; then param_3=$param; fi
     if [[ "$i" =~ ^(4)$ ]]; then param_4=$param; fi    
-    i=$((i + 1));
+    i=$((i + 1))
+    iparams=$((i + 1))
 done
 
 run()
@@ -24,10 +26,10 @@ run()
         script=${value[0]}"_"${value[1]}
     fi
 
-    FILE=$DIR/scripts/$script.sh
+    FILE=$DIR/script/$script.sh
     if [ ! -f "$FILE" ]; then
-        echo Localnet script: $(yellow "'$script:$method'") $(red "cannot be found!")
-        echo For localnet $(yellow "'scripts'") information run: $ $(green "localnet help")
+        echo ${ALIAS} script: $(yellow "'$script:$method'") $(red "cannot be found!")
+        echo For ${ALIAS} $(yellow "'scripts'") information run: $ $(green "${ALIAS} help")
         exit 1
     else
         . $FILE
@@ -36,5 +38,5 @@ run()
 
 run
 
-# Terminal output last line break
+# Last line output break
 echo
