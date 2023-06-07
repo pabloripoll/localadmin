@@ -29,13 +29,14 @@ PROJ_FLD="/var/www"
 PROJ_PHP="/var/www/nginx"
 PROJ_APACHE="/var/www/apache"
 PROJ_JAVA="/var/www/java"
+PROJ_JAVASP="/var/www/springboot"
 PROJ_NODEJS="/var/www/nodejs"
 PROJ_DOTNET="/var/www/dotnet"
 PROJ_PYTHON="/var/www/python"
 PROJ_GO="/var/www/golang"
 
 ## Languages
-LANGS="php|nodejs|dotnet|java|pyton|c++|go"
+LANGS="php|go|nodejs|dotnet|pyton|java|javasp"
 
 ## Language versions
 php_versions()

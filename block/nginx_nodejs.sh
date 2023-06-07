@@ -14,12 +14,13 @@ server {
         server_name ${domain}${TLD} www.${domain}${TLD};
 
         location / {
-                # Reverse proxy for GO
-                proxy_pass http://127.0.0.1:${port};
-                proxy_set_header Host $(echo '$host');
-                proxy_set_header X-Real-IP $(echo '$remote_addr');
+                # Reverse proxy for NodeJS
                 proxy_set_header X-Forwarded-For $(echo '$proxy_add_x_forwarded_for');
-                proxy_set_header X-Forwarded-Proto $(echo '$scheme');                
+                proxy_set_header Host $(echo '$host');
+                proxy_pass http://127.0.0.1:${port};
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $(echo '$http_upgrade');
+                proxy_set_header Connection "upgrade";
         }
 
         # Certbot

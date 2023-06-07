@@ -14,7 +14,7 @@ server {
         server_name ${domain}${TLD} www.${domain}${TLD};
 
         location / {
-                # Reverse proxy for GO
+                # Reverse proxy for Python
                 proxy_pass http://127.0.0.1:${port};
                 proxy_set_header Host $(echo '$host');
                 proxy_set_header X-Real-IP $(echo '$remote_addr');

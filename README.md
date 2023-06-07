@@ -347,7 +347,7 @@ NGINX sites has been updated!
 ```
 
 **· Remove domain from register:** \
-To remove of a domain registere on Nginx
+To remove of a domain registered on Nginx
 ```
 $ localnet domain:remove mydomain
 ```
