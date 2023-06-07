@@ -38,7 +38,8 @@ echo $(red "Warning!") domain $(yellow "${domain}${TLD}") accessed through $(yel
 prompt_confirm_proceed "Are you sure to proceed?" || exit 1
 
 # Remove on Apache if domain belongs to
-if [[ "$platform" =~ ^(apache)$ ]]; then
+file=${ETC_APACHE}/sites-available/${domain}${TLD}.conf
+if [[ "$platform" =~ ^(apache)$ || -f "$file" ]]; then
     file=${DIR_PLATFORM}/sites-enabled/${domain}${TLD}.conf
     if [ -f "$file" ]; then
         action=$(echo "$(sudo a2dissite ${domain}${TLD}.conf)")
