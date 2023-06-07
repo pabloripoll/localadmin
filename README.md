@@ -376,5 +376,11 @@ $ localnet domain:remove apache mydomain
 ```
 Output
 ```
-
+Warning! domain mydomain.localhost accessed through APACHE platform will be remove.
+Are you sure to proceed? [y/n]: y
+[sudo] password for user:
+Domain mydomain.localhost has been remove of APACHE platform.
+APACHE sites has been updated!
+Domain mydomain.localhost has been remove of NGINX platform.
+NGINX sites has been updated!
 ```
