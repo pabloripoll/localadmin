@@ -32,13 +32,13 @@ Before start, **read `config/settings.sh` to know if any variable or constant mu
 ## Installation
 It's recommended to install this program available only for one sudo user at `$HOME/bin` directory but if it need for all users, it can be installed on `/usr/local/bin` directory. Create the directory where this program is going to be placed. The following example will use:
 ```
-$ mkdir -p $HOME/bin/localnet; sudo chown $USER:root $HOME/bin/localnet; cd $HOME/bin/localnet;
+$ mkdir -p $HOME/bin/localnet; sudo chown $USER:root $HOME/bin/localnet; cd $HOME/bin/localnet; chmod +x ./*;
 ```
 Then, change directory to run the installation script
 ```
-$ . install.sh
+$ ./install.sh
 ```
-Once installed, you can run the admin commands as for e.g. listing Nginx registered domains:
+Once installed, refresh or open new terminal to run the admin commands as for e.g., listing Nginx registered domains with:
 ```
 $ localnet domains
 ```

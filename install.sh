@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-DIR="${BASH_SOURCE%/*}"
-if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+DIR=$PWD
 . "$DIR/config/setting.sh"
 . "$DIR/support/styles.sh"
-. "$DIR/support/dialogues.sh"
+. "$DIR/support/dialogue.sh"
 
 echo "Bash --version ${BASH_VERSION}"
 echo Activating $(yellow "Domains Admin") with $(yellow "${ALIAS}") as alias name:
