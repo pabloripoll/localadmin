@@ -11,7 +11,7 @@ echo Activating $(yellow "Domains Admin") with $(yellow "${ALIAS}") as alias nam
 prompt_confirm_proceed "Are you sure to continue?" || exit 1
 
 echo "" >> ~/.bashrc
-echo "## --- DOMAINS ADMIN --- ###" >> ~/.bashrc
+echo "## --- NGINX DOMAINS ADMIN --- ###" >> ~/.bashrc
 echo "alias $ALIAS='$DIR/main.sh'" >> ~/.bashrc
 source ~/.bashrc
 

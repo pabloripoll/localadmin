@@ -30,9 +30,9 @@ All Nginx dedicated server blocks can be adapted for your requirementes if are d
 Before start, **read `config/settings.sh` to know if any variable or constant must be updated**
 
 ## Installation
-Create the directory where this program is going to be placed. The following example will use:
+It's recommended to install this program available only for one sudo user at `$HOME/bin` directory but if it need for all users, it can be installed on `/usr/local/bin` directory. Create the directory where this program is going to be placed. The following example will use:
 ```
-$ mkdir /var/www/admin; sudo chown $USER:root /var/www/admin; cd /var/www/admin; 
+$ mkdir -p $HOME/bin/localnet; sudo chown $USER:root $HOME/bin/localnet; cd $HOME/bin/localnet;
 ```
 Then, change directory to run the installation script
 ```
