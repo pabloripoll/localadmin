@@ -1,37 +1,47 @@
 # Nginx / Apache Domains Admin
-This program runs on **systemctl** Debian 8+ / Ubuntu 16.04+ **(still in development)**
+This program runs on **systemd** init systems installed in distros like Debian or Ubuntu consisting on an automation for managing domains basic settings on **LINUX OS** local machine, VPS or cloud server for deploying, listing or removing domains with much frequency in servers that primarly use **NGINX**, listening on port 80.
 
-This program is a batch of shortcuts commands to help on **LINUX OS** local machine, VPS or cloud server to speed up common actions to deploy, list or remove domains with much frequency.
-In my case as a web developer, accomplishing all the steps to manage several testing apps turned into an anoyed job thus a waiste of time and focus. So, that's why I took the time to implement something like this, for shortcuts support and no complex software installation.
-
-This program is developed for servers that primarly use NGINX listening on port 80. The **domain:create** wizard will ask for the basic configuration parameters to create a new server block but for practical usage, the edit will be manual.
-
+The **domain:create** wizard will ask for the basic configuration parameters to create a new server block but for practical usage, the edit will be manual.
 For PHP projects gets the installed versions on system by its directory name found on `/etc/php` and depending on wich serve the domain is being created will automatically reverse proxy. \
 In the other hand, for other languages or Dockerized projects or directly served in other ports, like: NodeJS *(w/PM2)*, .NET or JAVA, it will create an server block for NGINX with reversed proxy to the desired port.
+
+## Why?
+This program was developed to speed up common domain's actions when accomplishing all the steps to manage several testing apps turns into an anoyed job thus a waiste of time and focus. For this reason, I've taken the time to implement a **BASH** program for shortcuts support without complex software installation.
 
 ## Minimum requirements
 Linux OS with Debian 8+ or Ubuntu 16+ \
 NGINX on port:80 \
+Have installed one of the supported languages.
+
+## Supported languages
+PHP \
+Go \
+NodeJS \
+Python \
+DotNet \
+Java \
+Java Springboot
+
+## Customization
+By default the program alias uses the mnemotechnic name `localnet`. So, all the following command examples will use **localnet** as alias. But, if you want to use another alias, open `config/setting.sh` file and change it in the `ALIAS="otheralias"` constant.
+
+All Nginx dedicated server blocks can be adapted for your requirementes if are different to already set by editing the blocks in `block` directory.
+
+Before start, **read `config/settings.sh` to know if any variable or constant must be updated**
 
 ## Installation
-By default the alias is the mnemotechnic `localnet` name and so all the following examples will use **localnet** as alias. But, if you want to use another alias, open `install.sh` file in main directory and change `ALIAS="otheralias"` constant.
-
 Create the directory where this program is going to be placed. The following example will use:
 ```
 $ mkdir /var/www/admin; sudo chown $USER:root /var/www/admin; cd /var/www/admin; 
 ```
-
-Open the `install.sh` file to update settings if needed. Then, run the installation script
+Then, change directory to run the installation script
 ```
 $ . install.sh
 ```
-
-Now you can run the script commands inside. For e.g.:
+Once installed, you can run the admin commands as for e.g. listing Nginx registered domains:
 ```
 $ localnet domains
 ```
-
-But before start, **read `config/settings.sh` to know if any variable or constant must be updated**
 
 # Commands
 
@@ -40,13 +50,12 @@ List all domains registered by server plaform.
 ```
 $ localnet domains
 ```
-
 That's the sames as:
 ```
 $ localnet domains:index nginx
 ```
 
-By default will list **Nginx** domains but it will list **Apache** *(shortcut for: apache2)* by specifying it
+By default will list **Nginx** domains but it will list **Apache** *(shortcut for: apache2)* if it was specified
 ```
 $ localnet domains apache
 ```
@@ -58,7 +67,7 @@ Domains registered locally on NGINX server platform:
 [may 03 22:53] [active] apitest.localhost.conf
 [ene 11 2022X] [record] example.localhost.conf
 ```
-Where `[record]` status is for domains that seved only on `site-available` but not on `site-enabled` directory. Thus, they cannot be visited by browsers.
+Where `[record]` status is for domains that are listed on `site-available` but not on `site-enabled` directory. Thus, they cannot be visited by browsers.
 
 Also there's a command to list both directories with their respective names `available` and `enabled`
 ```
@@ -73,12 +82,12 @@ Once a domain is created or updated, server must be restarted. To do so, run
 ```
 $ localnet domains:update
 ```
-Above command can be requested for Apache server as well.
+Above command can be executed for Apache server as well.
 ```
 $ localnet domains:update apache
 ```
 
-**· Search for registered domains:** \
+**· Searching for a registered domain:** \
 Search for a domain on nginx server
 ```
 $ localnet domains:like mydom
@@ -103,21 +112,22 @@ Domains registered on APACHE with name like: *mydom*
 [record] demo.mydomain.localhost.conf
 [record] mydomain-old.localhost.conf
 ```
+
 **· Single root domain actions:** \
 Default top level domain is *.localhost* for is not necessary to add it when is used on local machine. For the following examples, *mydomain* will be used
 ```
-$ localnet domain nginx mydomain
+$ localnet domain mydomain
 ```
 But if this program has been installed on a remote server, constant `TLD=""` on `config/settings.sh` must be set empty to manage full root domain
 ```
-$ localnet domain nginx mydomain.com
+$ localnet domain mydomain.com
 ```
 **IMPORTANT!** **** Shouldn't be applied protocols **http:// https://**, neither subdomain **www.** ****
 
 **· Check domain info:** \
 To check out a domain existance and configuration
 ```
-$ localnet domain nginx mydomain
+$ localnet domain mydomain
 ```
 Output will prompt as follows
 ```
@@ -353,10 +363,14 @@ $ localnet domain:remove mydomain
 ```
 Output
 ```
-
+Warning! domain mydomain.localhost accessed through NGINX platform will be remove.
+Are you sure to proceed? [y/n]: y
+[sudo] password for user:
+Domain mydomain.localhost has been remove of NGINX platform.
+NGINX sites has been updated!
 ```
 
-And for Apache
+And for Apache will automatically sincronized will Nginx. So, it will just require to run
 ```
 $ localnet domain:remove apache mydomain
 ```
