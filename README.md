@@ -1,4 +1,4 @@
-# Nginx / Apache Domains Admin
+# Nginx Domains Admin
 This program runs on **systemd** init systems installed in distros like Debian or Ubuntu consisting on an automation for managing domains basic settings on **LINUX OS** local machine, VPS or cloud server for deploying, listing or removing domains with much frequency in servers that primarly use **NGINX**, listening on port 80.
 
 The **domain:create** wizard will ask for the basic configuration parameters to create a new server block but for practical usage, the edit will be manual.
